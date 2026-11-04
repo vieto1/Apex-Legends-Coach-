@@ -45,3 +45,11 @@ REA 6.8.0 analysierte die eigene JavaScript-Oberfläche statisch. Die erweiterte
 Keine echte Apex-Aufnahme lag vor. Precision, Recall, Fehlalarmrate und taktische Richtigkeit auf echtem Gameplay sind nicht validiert. Die synthetische Demo ist ein Integrationstest, kein Benchmark für echte Matches. OCR kann trotz Konfidenz falsche Ziffern liefern; Balkenmessung und Kartenbewegung bleiben empfindlich gegenüber HUD-Änderungen und Verdeckung. Leere Balken gelten bewusst als unbekannt. Prozentwerte sind keine kalibrierten Wahrscheinlichkeiten.
 
 Keine Spielspeicher-/Netzwerktelemetrie, keine vollständige Schadensbilanz in HP, keine automatische Messung kognitiver Reaktionszeit, keine trainierte Deckungs-/Entscheidungsbewertung und keine Echtzeitanalyse während der Aufnahme.
+
+## Browserfassung und GitHub Pages
+
+Zusätzlich bestehen sieben reine JavaScript-Ereignistests (`npm test`). Die Browserfassung wurde mit echter WebAssembly-OCR auf statischem Hosting ohne Python-Backend geprüft, einschließlich GitHub-Projektunterpfad. Demo-Schadenszuwachs: 90, Zähler vollständig lesbar. Profile, lokale Notizen, eigene Markierungen, Review, Neuladen, erneute Analyse, ZIP und Clip-Export erfolgreich. Netzwerkprüfung: nur GET an dieselbe Website, kein Video-Upload.
+
+Ein separater Browser-Test prüft lokale Bildschirmaufnahme mit einer künstlichen Canvas-Quelle, lesbare WebM-Dauer und Schutz vor Bearbeitung in zwei Tabs. Die benötigten Browserfunktionen wurden unter Chromium geprüft; Safari wurde auf dieser Linux-Maschine nicht nativ ausgeführt.
+
+Die Website wurde auf GitHub veröffentlicht. Der echte Pages-Workflow bestätigt Build und Deployment für `3bc8b6d`: https://github.com/vieto1/Apex-Legends-Coach-/actions/runs/41932147126. Sie ist unter https://vieto1.github.io/Apex-Legends-Coach-/ vorgesehen und laut GitHub erfolgreich bereitgestellt. Der direkte Abruf dieser Domain ist aus der Cloud durch die Netzwerkrichtlinie gesperrt; die Veröffentlichung wurde anhand des GitHub-Status geprüft.

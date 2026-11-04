@@ -6,7 +6,7 @@ Die Browserfassung in `browser/` verarbeitet Aufnahmen direkt im Browser. GitHub
 
 Repository: `vieto1/Apex-Legends-Coach-`. Das Build-Skript erzeugt `dist/` und berücksichtigt den Unterpfad einer GitHub-Projektwebsite. Der Branch `gh-pages` enthält ausschließlich die gebaute Website, öffentliches OCR-Modell, Lizenzen und eine ausdrücklich synthetische Demo, keine privaten Aufnahmen.
 
-Der Workflow `.github/workflows/pages.yml` testet und baut Änderungen auf `main`, aktualisiert `gh-pages` und fordert bei aktivierten Pages einen neuen Build an. Wenn GitHub die erste Aktivierung nicht automatisch übernimmt, muss ein Repository-Administrator einmal unter **Settings → Pages → Deploy from a branch → gh-pages → /(root)** speichern. Die Standardadresse ist anschließend `https://vieto1.github.io/Apex-Legends-Coach-/`. Eine bestätigte Git-Veröffentlichung allein beweist nicht, dass Pages aktiviert oder die öffentliche Adresse erreichbar ist.
+Der Workflow `.github/workflows/pages.yml` testet und baut Änderungen auf `main`, aktualisiert `gh-pages` und fordert bei aktivierten Pages einen neuen Build an. Wenn GitHub die erste Aktivierung nicht automatisch übernimmt, muss ein Repository-Administrator einmal unter **Settings → Pages → Deploy from a branch → gh-pages → /(root)** speichern. Die Website ist unter **https://vieto1.github.io/Apex-Legends-Coach-/** veröffentlicht. [GitHub-Pages-Build und Deployment](https://github.com/vieto1/Apex-Legends-Coach-/actions/runs/41932147126) sind erfolgreich abgeschlossen. Eine bestätigte Git-Veröffentlichung allein beweist nicht, dass Pages aktiviert oder die öffentliche Adresse erreichbar ist.
 
 Die erstmalige Pages-Aktivierung braucht Administrationsrechte. Der normale Actions-Token darf sie laut offizieller `actions/configure-pages`-Dokumentation nicht eigenständig durchführen. Die Cloud-Umgebung kann Git lesen/schreiben, aber die GitHub-REST-API ist durch die Netzwerkrichtlinie blockiert; das ist kein Beleg für fehlende Git-Berechtigung. Nie Tokenwerte in Chat, Dateien oder Workflowcode schreiben.
 
@@ -36,3 +36,11 @@ node scripts/pages-recording-smoke.cjs
 ```
 
 Die Browser-Smoketests benötigen Playwright/Chromium nur für die Entwicklung. Sie prüfen echte lokale WebAssembly-OCR, 90 Schadenszuwachs in der synthetischen Demo, Persistenz über Neuladen, Notizen, Profile, Review, erneute Analyse, ZIP- und Clip-Export, die Dauer einer Browser-Aufnahme und Mehr-Tab-Schutz. Netzwerkbeobachtung stellt sicher, dass nur GET-Anfragen an denselben Website-Host gehen. Das ist kein Precision-/Recall-Benchmark für echte Apex-Matches.
+
+## Bestätigter Veröffentlichungsstand
+
+- Quellcode auf `main`: ursprüngliche Veröffentlichung `aad0d99`.
+- Gebaute Website auf `gh-pages`, verifizierter Deployment-Commit `3bc8b6d`.
+- GitHub-Pages-Workflow `41932147126`: Build, Statusmeldung und Deployment erfolgreich, Zieladresse `https://vieto1.github.io/Apex-Legends-Coach-/`.
+- Die lokale Browserprüfung wurde unter exakt diesem Projekt-Unterpfad ausgeführt, einschließlich OCR, Notizen, erneuter Analyse, ZIP und Clip-Export. Alle Anfragen gingen als GET an denselben Host.
+- Ein direkter HTTP-Abruf von `vieto1.github.io` aus dieser Cloud-Umgebung ist durch die Egress-Richtlinie blockiert. Der Veröffentlichungsstatus wurde über die zugängliche GitHub-Actions-Seite bestätigt; diese Sperre wurde nicht umgangen.

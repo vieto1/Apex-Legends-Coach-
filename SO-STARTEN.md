@@ -2,7 +2,7 @@
 
 ## MacBook: Website ohne Installation
 
-Die GitHub-Pages-Fassung benötigt nur einen aktuellen Browser. Website öffnen, die automatische Vorbereitung der Texterkennung abwarten und **Beispiel ausprobieren** klicken. [Veröffentlichung und Adresse](docs/github-pages.md).
+Öffne **https://vieto1.github.io/Apex-Legends-Coach-/** in einem aktuellen Browser (Chrome/Edge empfohlen). Die Website ist auf GitHub veröffentlicht. Die automatische Vorbereitung der Texterkennung abwarten und **Beispiel ausprobieren** klicken. [Veröffentlichung und Adresse](docs/github-pages.md).
 
 Videos und Notizen bleiben in deinem Browserprofil. Kein Docker oder Python nötig. Unterstützte Videoformate: MP4 (H.264) und WebM. Die folgenden Startdateien sind nur für die alternative lokale Serverfassung.
 

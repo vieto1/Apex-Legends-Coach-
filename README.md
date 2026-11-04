@@ -18,7 +18,7 @@ Lokale, private Review-Anwendung für Apex-Legends-Aufnahmen: Bildschirm aufnehm
 
 Die neue GitHub-Pages-Fassung benötigt auf dem Mac keine Docker-, Python- oder App-Installation. Die Texterkennung lädt beim Öffnen der Website automatisch. Videos, Notizen und Analyse laufen lokal im Browser, ohne Upload an einen Analyse-Server. Eine kalibrierte Demo ist per Knopfdruck verfügbar.
 
-Veröffentlichung und vollständige Hinweise: [GitHub-Pages-Anleitung](docs/github-pages.md). Die Website wird aus `browser/` und der gemeinsamen Oberfläche gebaut. Standardadresse nach Aktivierung: `https://vieto1.github.io/Apex-Legends-Coach-/`. Nur ein erfolgreicher Pages-Build bestätigt die Veröffentlichung; ein Git-Push allein reicht nicht.
+Veröffentlichung und vollständige Hinweise: [GitHub-Pages-Anleitung](docs/github-pages.md). Die Website wird aus `browser/` und der gemeinsamen Oberfläche gebaut. **Website: https://vieto1.github.io/Apex-Legends-Coach-/**. GitHub hat Build und Deployment erfolgreich abgeschlossen: [Veröffentlichungsnachweis](https://github.com/vieto1/Apex-Legends-Coach-/actions/runs/41932147126).
 
 **Unterschiede:** Direkt unterstützte Browser-Codecs statt universeller FFmpeg-Konvertierung; Clip-Export im Vordergrund und in Echtzeit bis zwei Minuten. Speicherung nur in diesem Browserprofil. Die Website selbst ist öffentlich, deine Videos werden nicht an GitHub gesendet. Keine auf echten Apex-Matches validierte taktische KI.
 
