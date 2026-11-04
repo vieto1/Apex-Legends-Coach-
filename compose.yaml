@@ -1,0 +1,14 @@
+name: apex-review
+services:
+  app:
+    image: apex-review:local
+    build: .
+    ports:
+      - "127.0.0.1:${APEX_PORT:-8000}:8000"
+    volumes:
+      - reviews:/data
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+volumes:
+  reviews:

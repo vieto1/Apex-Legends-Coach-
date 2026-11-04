@@ -1,0 +1,44 @@
+name: Build and publish browser website
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: github-pages-branch
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apex-review-website
+          path: dist
+      - name: Publish static branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
+          publish_branch: gh-pages
+          enable_jekyll: false
+      - name: Request Pages build when Pages is enabled
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          if gh api "repos/$GITHUB_REPOSITORY/pages" --jq .html_url; then
+            gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
+          else
+            echo "::warning::Enable Settings > Pages > Deploy from a branch > gh-pages / (root). GitHub requires repository-owner permission for the initial activation."
+          fi
