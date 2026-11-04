@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="de" data-runtime="browser">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23101517'/%3E%3Cpath d='M32 8L54 32 32 56 10 32Z' fill='%23c5f078'/%3E%3C/svg%3E"
+    />
+    <title>Apex Review · Private Gameplay-Analyse</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+    <script type="module" src="./assets/app.js"></script>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/">◈ APEX <b>REVIEW</b></a
+      ><span id="systemStatus" role="status"
+        >LOKAL · PRIVAT · GEMEINSAM BESSER</span
+      >
+    </header>
+    <main>
+      <section class="intro">
+        <p class="eyebrow">DEIN NÄCHSTER FIGHT BEGINNT IM REVIEW</p>
+        <h1>Aus Gameplay wird<br /><em>ein besserer Plan.</em></h1>
+        <p>
+          Analysiere deine Apex-Aufnahmen. Prüfe die Belege.<br />Besprich die
+          entscheidenden Momente mit deinem Squad.
+        </p>
+      </section>
+      <section class="panel">
+        <div class="actions">
+          <button id="tryDemo" type="button">Beispiel ausprobieren</button
+          ><span class="muted"
+            >Synthetische HUD-Demo mit fertiger Kalibrierung – kein echtes
+            Gameplay.</span
+          >
+        </div>
+        <div class="section-head">
+          <h2>01 / Aufnahme hinzufügen</h2>
+          <span>MP4 (H.264), WebM · lokale Browseranalyse</span>
+        </div>
+        <div class="actions">
+          <button id="recordStart" type="button">
+            ● Bildschirm / Spielfenster aufnehmen</button
+          ><button id="recordStop" type="button" disabled>
+            Aufnahme beenden</button
+          ><span id="recordStatus" role="status"
+            >Lokal im Browser · Audio nur bei Freigabe der Quelle</span
+          >
+        </div>
+        <form id="upload">
+          <label class="drop"
+            >Gameplay auswählen<input
+              type="file"
+              id="file"
+              accept="video/*"
+              required /></label
+          ><a id="downloadRecording" hidden
+            >Ausgewählte Aufnahme lokal speichern ↗</a
+          >
+          <details id="calibrationDetails">
+            <summary>HUD kalibrieren — vor der Analyse empfohlen</summary>
+            <p>
+              Wähle das Video aus. Markiere zuerst nur die Ziffern des
+              kumulierten Schadenszählers oben rechts, dann den Karteninhalt der
+              Minimap. Bei Gesundheit/Schild nur den inneren horizontalen Balken
+              markieren, bei Munition nur die Magazinzahl. Die Werte gelten für
+              dieses Video. Unmarkierte Bereiche bleiben unbekannt.
+            </p>
+            <div class="calibration">
+              <video id="calibrationVideo" controls muted></video
+              ><canvas id="calibrationCanvas"></canvas>
+            </div>
+            <div class="actions">
+              <button type="button" id="capture">
+                Aktuelles Bild kalibrieren</button
+              ><button type="button" id="damageMode">
+                Schadenszähler markieren</button
+              ><button type="button" id="mapMode">Minimap markieren</button
+              ><button type="button" id="healthMode">
+                Gesundheit markieren</button
+              ><button type="button" id="shieldMode">Schild markieren</button
+              ><button type="button" id="ammoMode">Munition markieren</button
+              ><button type="button" id="clearRoi">Markierungen löschen</button>
+            </div>
+            <p id="roiStatus">Keine HUD-Bereiche ausgewählt.</p>
+            <label
+              >HUD-Koordinaten (JSON, relativ zum Bild)<textarea
+                id="roiJson"
+                spellcheck="false"
+              ></textarea></label
+            ><button type="button" id="applyRoi">Koordinaten übernehmen</button>
+            <div class="actions">
+              <label
+                >Gespeichertes Profil<select id="profileSelect">
+                  <option value="">Profil auswählen</option>
+                </select></label
+              ><button type="button" id="loadProfile">Profil laden</button
+              ><button type="button" id="deleteProfile">Profil löschen</button>
+            </div>
+            <div class="actions">
+              <label
+                >Profilname<input
+                  id="profileName"
+                  maxlength="80"
+                  placeholder="Apex 1080p HUD" /></label
+              ><button type="button" id="saveProfile">Profil speichern</button>
+            </div>
+          </details>
+          <p class="muted">
+            Lokale Heuristiken, keine verifizierte Spieltelemetrie. Ohne
+            HUD-Kalibrierung wird nur das Video vorbereitet. Keine automatischen
+            Aussagen zu Reaktionszeiten oder taktischer Qualität.
+          </p>
+          <button class="primary" id="submit">Aufnahme analysieren ↗</button>
+          <p id="uploadStatus" role="status"></p>
+        </form>
+      </section>
+      <div class="workspace">
+        <aside class="panel">
+          <label
+            >Aufnahmen suchen<input
+              id="matchSearch"
+              type="search"
+              placeholder="Dateiname …"
+          /></label>
+          <h2>02 / Deine Aufnahmen</h2>
+          <div id="matches"></div>
+        </aside>
+        <section class="panel review">
+          <div class="section-head">
+            <h2>03 / Squad-Review</h2>
+            <a id="export" hidden>JSON exportieren ↗</a>
+          </div>
+          <div id="empty">
+            <h3>Jeder Moment hat Kontext.</h3>
+            <p>
+              Wähle eine Aufnahme. Hier erscheinen Video, Timeline, Belege und
+              eure Notizen.
+            </p>
+          </div>
+          <div id="review" hidden>
+            <h3 id="matchName"></h3>
+            <div class="actions">
+              <button type="button" id="calibrateExisting">
+                Diese Aufnahme kalibrieren</button
+              ><button type="button" id="reanalyze">
+                Mit aktuellem HUD-Profil neu analysieren</button
+              ><a id="archive">Berichtarchiv herunterladen</a
+              ><a id="originalVideo">Original herunterladen</a
+              ><button type="button" id="deleteMatch" class="danger">
+                Aufnahme löschen
+              </button>
+            </div>
+            <p id="actionStatus" role="status"></p>
+            <p id="analysisStatus" role="status"></p>
+            <video id="player" controls preload="metadata"></video>
+            <div class="stats" id="stats"></div>
+            <p id="qualityStatus" class="muted"></p>
+            <h3>Timeline &amp; Diskussionspunkte</h3>
+            <div class="actions">
+              <label
+                >Ereignistyp<select id="eventFilter">
+                  <option value="">Alle Typen</option>
+                  <option value="fight">Kampfphasen</option>
+                  <option value="combat_start">Kampfbeginn</option>
+                  <option value="damage_delta">Schadenszuwachs</option>
+                  <option value="position_change">Positionswechsel</option>
+                  <option value="resource_loss">Ressourcenverlust</option>
+                  <option value="resource_recovery">Wiederherstellung</option>
+                  <option value="ammo_refill">Nachladen / Waffenwechsel</option>
+                  <option value="exposure_review">Bewegung unter Druck</option>
+                  <option value="reload_pressure">Nachladen unter Druck</option>
+                  <option value="low_health_fight">
+                    Niedrige Gesundheit im Kampf
+                  </option>
+                  <option value="manual">Eigene Markierungen</option>
+                </select></label
+              ><label
+                >Review-Status<select id="reviewFilter">
+                  <option value="">Alle Befunde</option>
+                  <option value="unreviewed">Ungeprüft</option>
+                  <option value="confirmed">Bestätigt</option>
+                  <option value="dismissed">Verworfen</option>
+                </select></label
+              >
+            </div>
+            <div id="events"></div>
+            <details>
+              <summary>Eigenen Moment markieren</summary>
+              <form id="eventForm">
+                <label
+                  >Kategorie<select id="manualKind">
+                    <option value="manual">Beobachtung</option>
+                    <option value="enemy_visible">
+                      Gegner erstmals sichtbar
+                    </option>
+                    <option value="first_shot">Erster eigener Schuss</option>
+                    <option value="positioning">Positionierung</option>
+                    <option value="rotation">Rotation</option>
+                    <option value="resources">Ressourcen</option>
+                    <option value="decision">
+                      Entscheidung / Fehlerquelle
+                    </option>
+                  </select></label
+                >
+                <div class="actions">
+                  <label
+                    >Start (Sekunden)<input
+                      id="eventStart"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      required /></label
+                  ><label
+                    >Ende (Sekunden)<input
+                      id="eventEnd"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      required /></label
+                  ><button type="button" id="markTime">
+                    Aktuelle Zeit übernehmen
+                  </button>
+                </div>
+                <label
+                  >Titel<input
+                    id="eventTitle"
+                    maxlength="150"
+                    required /></label
+                ><label
+                  >Erkenntnis / Verbesserungsvorschlag<textarea
+                    id="eventAdvice"
+                    maxlength="2000"
+                  ></textarea>
+                </label>
+                <div class="actions">
+                  <button class="primary" id="saveMoment">
+                    Moment speichern</button
+                  ><button type="button" id="cancelMoment" hidden>
+                    Bearbeiten abbrechen
+                  </button>
+                </div>
+                <p id="eventStatus" role="status"></p>
+              </form>
+              <p class="muted">
+                „Gegner sichtbar“ gefolgt von „Erster Schuss“ ergibt ein manuell
+                markiertes Antwortintervall. Es ist keine gemessene kognitive
+                Reaktionszeit.
+              </p>
+            </details>
+            <div id="responseIntervals"></div>
+            <h3>Squad-Notizen</h3>
+            <form id="noteForm">
+              <label
+                >Zeit im Video (Sekunden)<input
+                  id="noteTime"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value="0"
+                  required /></label
+              ><button type="button" id="useTime">Aktuelle Videozeit</button
+              ><label
+                >Beobachtung<textarea
+                  id="noteBody"
+                  maxlength="2000"
+                  required
+                  placeholder="Was hätten wir in diesem Moment anders machen können?"
+                ></textarea></label
+              ><button class="primary">Notiz speichern</button>
+              <p id="noteStatus" role="status"></p>
+            </form>
+            <div id="notes"></div>
+          </div>
+        </section>
+      </div>
+      <footer>GitHub stellt nur die Website und das OCR-Modell bereit. Deine Videos und Notizen bleiben in diesem Browser. Browserdaten nicht löschen, bevor du benötigte Dateien exportiert hast. 
+        Apex Review ist ein unabhängiges privates Projekt. Ergebnisse sind
+        Diskussionshilfen. Prüfe jeden vorgeschlagenen Moment im Originalvideo.
+      </footer>
+    </main>
+  </body>
+</html>
