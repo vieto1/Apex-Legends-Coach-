@@ -36,6 +36,7 @@ for (const file of [
   "cossa-sanctum.svg",
   "cossa-foreground.svg",
   "cossas-ki-social.png",
+  "apex-master-rank.png",
   "fonts",
 ])
   await cp(

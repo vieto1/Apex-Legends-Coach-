@@ -51,3 +51,7 @@ APEX_PAGES_URL=http://127.0.0.1:8789 node scripts/pages-recording-smoke.cjs
 ```
 
 Die Browserprüfungen benötigen Chromium/Playwright als Entwicklungswerkzeuge; die veröffentlichte Website benötigt keine App-Installation.
+
+## Master-Rangsymbol
+
+Die Hero-Zeile „Road to Masters“ verwendet das originale violette Apex-Legends-Master-Rangsymbol als lokale PNG-Datei (`apexcoach/static/apex-master-rank.png`). Quelle: [Rang-Asset](https://github.com/Mooa-sys/apex-map-rotation-desktop-widget/blob/27df289ac7fd40fcf844cfda975dd416605a2d4b/src/renderer/public/ranked-icons/master.png), abgerufen am 5. November 2026. Das Spielzeichen gehört Electronic Arts / Respawn Entertainment; es kennzeichnet das Rangziel, keine offizielle Partnerschaft.
