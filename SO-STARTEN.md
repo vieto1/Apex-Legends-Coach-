@@ -30,7 +30,7 @@ Alternativ auf allen Plattformen:
 docker compose up -d --build --wait
 ```
 
-Die lokale Website läuft auf `http://localhost:8000`. Bei belegtem Port z. B. `APEX_PORT=8008` setzen (Windows cmd: `set APEX_PORT=8008`, PowerShell: `$env:APEX_PORT=8008`), dann erneut starten. Zum Stoppen `Stop-Cossas-KI.cmd` oder `docker compose stop` verwenden.
+Die lokale Website läuft auf `http://localhost:8000`. Bei belegtem Port z. B. `APEX_PORT=8008` setzen (Windows cmd: `set APEX_PORT=8008`, PowerShell: `$env:APEX_PORT=8008`), dann erneut starten. Zum Stoppen `Stop-Cossas-KI.cmd` oder `./stop-local.sh` verwenden.
 
 ## Daten und Privatsphäre
 

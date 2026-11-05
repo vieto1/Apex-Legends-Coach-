@@ -6,7 +6,7 @@ import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
 FILES=['README.md','SO-STARTEN.md','Dockerfile','compose.yaml','.dockerignore','.gitignore',
-       'package.json','package-lock.json','requirements.txt','requirements-dev.txt','Start-Cossas-KI.cmd','Stop-Cossas-KI.cmd','start-local.sh']
+       'package.json','package-lock.json','requirements.txt','requirements-dev.txt','Start-Cossas-KI.cmd','Stop-Cossas-KI.cmd','start-local.sh','stop-local.sh']
 DIRECTORIES=['apexcoach','browser','.github','scripts','tests','docs']
 
 def build(output=None):
