@@ -1,8 +1,13 @@
 const browserBackend =
   document.documentElement.dataset.runtime === "browser"
-    ? new (await import("./browser/client.js")).BrowserBackend()
+    ? new (await import("./browser/client.js?brand=cossas-ki")).BrowserBackend()
     : null;
 const $ = (id) => document.getElementById(id);
+const preferredScroll = () =>
+  matchMedia("(prefers-reduced-motion: reduce)").matches ||
+  document.body.dataset.motion === "paused"
+    ? "auto"
+    : "smooth";
 const keys = [
   "damage_roi",
   "minimap_roi",
@@ -27,6 +32,7 @@ let selected = null,
   snapshot = null;
 let lastMatch = null,
   rendered = "",
+  renderedMatches = "",
   savedProfiles = [],
   recording = null,
   editingEvent = null;
@@ -300,6 +306,7 @@ $("upload").onsubmit = async (e) => {
     $("uploadStatus").textContent =
       "Aufnahme gespeichert. Analyse läuft lokal.";
     await refresh();
+    $("squad").scrollIntoView({ behavior: preferredScroll() });
   } catch (err) {
     report(err, "uploadStatus");
   } finally {
@@ -359,7 +366,7 @@ $("recordStart").onclick = async () => {
       if (size) {
         const file = new File(
           chunks,
-          `Apex-Aufnahme-${new Date().toISOString().replace(/[:.]/g, "-")}.webm`,
+          `Cossas-KI-Aufnahme-${new Date().toISOString().replace(/[:.]/g, "-")}.webm`,
           { type: recorder.mimeType },
         );
         const dt = new DataTransfer();
@@ -479,7 +486,7 @@ function renderEvents(m) {
         $("saveMoment").textContent = "Moment aktualisieren";
         $("cancelMoment").hidden = false;
         $("eventForm").closest("details").open = true;
-        $("eventForm").scrollIntoView({ behavior: "smooth" });
+        $("eventForm").scrollIntoView({ behavior: preferredScroll() });
       };
       actions.append(edit);
     }
@@ -514,28 +521,56 @@ $("eventFilter").onchange = $("reviewFilter").onchange = () => {
 };
 async function refresh() {
   const matches = await api("/api/matches");
-  $("matches").replaceChildren();
   const query = $("matchSearch").value.toLowerCase();
-  for (const m of matches.filter((m) => m.name.toLowerCase().includes(query))) {
-    const b = text("button", m.name, "match");
-    if (m.id === selected) b.classList.add("selected");
-    b.append(
-      text(
-        "small",
-        `${statusNames[m.status] || m.status} · ${Math.round(m.progress * 100)} %`,
-      ),
-    );
-    b.onclick = () => {
-      selected = m.id;
-      current = null;
-      rendered = "";
-      cancelEdit();
-      refresh().catch((err) => report(err));
-    };
-    $("matches").append(b);
+  const listKey = JSON.stringify([
+    query,
+    selected,
+    matches.map((m) => [
+      m.id,
+      m.name,
+      m.status,
+      m.progress,
+      m.duration,
+      m.error,
+    ]),
+  ]);
+  if (listKey !== renderedMatches) {
+    const focused = document.activeElement?.dataset?.matchId;
+    renderedMatches = listKey;
+    $("matches").replaceChildren();
+    for (const m of matches.filter((m) =>
+      m.name.toLowerCase().includes(query),
+    )) {
+      const b = text("button", m.name, "match");
+      b.dataset.matchId = m.id;
+      if (m.id === selected) b.classList.add("selected");
+      b.append(
+        text(
+          "small",
+          `${statusNames[m.status] || m.status} · ${Math.round(m.progress * 100)} %`,
+        ),
+      );
+      b.onclick = () => {
+        selected = m.id;
+        current = null;
+        rendered = "";
+        cancelEdit();
+        refresh()
+          .then(() => {
+            if (selected === m.id)
+              $("squad").scrollIntoView({ behavior: preferredScroll() });
+          })
+          .catch((err) => report(err));
+      };
+      $("matches").append(b);
+    }
+    if (!matches.length)
+      $("matches").append(text("p", "Noch keine Aufnahmen.", "muted"));
+    if (focused)
+      [...$("matches").querySelectorAll("button")]
+        .find((button) => button.dataset.matchId === focused)
+        ?.focus({ preventScroll: true });
   }
-  if (!matches.length)
-    $("matches").append(text("p", "Noch keine Aufnahmen.", "muted"));
   if (!selected) return;
   const id = selected,
     m = await api(`/api/matches/${id}`);
@@ -565,7 +600,7 @@ async function refresh() {
   }
   $("export").hidden = false;
   configureDownload($("export"), id, "report");
-  $("export").download = `apex-${id}.json`;
+  $("export").download = `cossas-ki-${id}.json`;
   configureDownload($("archive"), id, "export");
   configureDownload($("originalVideo"), id, "source");
   const fingerprint = JSON.stringify([
@@ -659,7 +694,7 @@ $("calibrateExisting").onclick = async () => {
   $("calibrationVideo").src = await videoUrl(selected);
   $("calibrationDetails").open = true;
   renderRoi();
-  $("calibrationDetails").scrollIntoView({ behavior: "smooth" });
+  $("calibrationDetails").scrollIntoView({ behavior: preferredScroll() });
 };
 $("reanalyze").onclick = async () => {
   if (!selected) return;
@@ -789,6 +824,7 @@ $("tryDemo").onclick = async () => {
     $("uploadStatus").textContent =
       "Synthetische Demo hinzugefügt. Analyse läuft lokal.";
     await refresh();
+    $("squad").scrollIntoView({ behavior: preferredScroll() });
   } catch (err) {
     report(err, "uploadStatus");
   } finally {
