@@ -337,6 +337,9 @@ img {
   flex: 0 0 auto;
 }
 .hero-manifesto {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.6vw, 24px);
   font-family: "Cossa Sans", sans-serif;
   text-transform: uppercase;
   font-size: clamp(25px, 2.7vw, 43px);
@@ -344,6 +347,13 @@ img {
   letter-spacing: -1.6px;
   line-height: 1.1;
   margin: 0 0 24px;
+}
+.hero-rank {
+  width: clamp(64px, 6.7vw, 96px);
+  height: auto;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px #b66bff55);
 }
 .hero-manifesto em {
   font-style: normal;
