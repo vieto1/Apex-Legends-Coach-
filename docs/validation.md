@@ -53,3 +53,11 @@ Zusätzlich bestehen sieben reine JavaScript-Ereignistests (`npm test`). Die Bro
 Ein separater Browser-Test prüft lokale Bildschirmaufnahme mit einer künstlichen Canvas-Quelle, lesbare WebM-Dauer und Schutz vor Bearbeitung in zwei Tabs. Die benötigten Browserfunktionen wurden unter Chromium geprüft; Safari wurde auf dieser Linux-Maschine nicht nativ ausgeführt.
 
 Die Website wurde auf GitHub veröffentlicht. Der echte Pages-Workflow bestätigt Build und Deployment für `3bc8b6d`: https://github.com/vieto1/Apex-Legends-Coach-/actions/runs/41932147126. Sie ist unter https://vieto1.github.io/Apex-Legends-Coach-/ vorgesehen und laut GitHub erfolgreich bereitgestellt. Der direkte Abruf dieser Domain ist aus der Cloud durch die Netzwerkrichtlinie gesperrt; die Veröffentlichung wurde anhand des GitHub-Status geprüft.
+
+## Cossa's KI — Design und Rebranding
+
+Die neue Hero-Szene und die Kapitelstruktur sind mit eigener SVG-Illustration, selbst gehosteten WOFF2-Schriften, Parallax und sanften Interaktionen implementiert. Die vorherige Produktbezeichnung ist aus Titeln, Navigation, Metadaten, Texten, Downloads und Startdateien entfernt. Dauerhafte Speicherkennungen bleiben kompatibel; die Browserprüfung lädt eine zuvor gespeicherte Aufnahme samt Notiz erfolgreich wieder.
+
+`scripts/design-smoke.cjs` prüft vier Kapitel, funktionierende mobile Navigation und Escape-Fokus, Parallax, Bewegungspause, `prefers-reduced-motion`, Fokus nach automatischer Aktualisierung und Layoutbreiten 320/360/390/768/1024/1440 px. Automatisierte Axe-Prüfungen nach WCAG A/AA und WCAG 2.1 AA melden auf Desktop und Mobil keine Verstöße. Text wird bei Kapitel-Eintritten nicht abgedunkelt; ein dunkler Grund der fixierten Navigation hält ihren Kontrast auch während des Scrollens stabil.
+
+Die vollständigen Browserabläufe mit OCR, Notizen, Profilen, Review, erneuter Analyse, ZIP-/Clip-Export und Aufnahme sind im neuen Layout erfolgreich. 27 Python-Tests und sieben JavaScript-Regeltests bestehen weiterhin; Clip- und Paketnamen wurden zusätzlich gezielt geprüft. Keine JavaScript-Laufzeitfehler. Die optische Gestaltung wurde anhand von Desktop- und Mobil-Screenshots kontrolliert.

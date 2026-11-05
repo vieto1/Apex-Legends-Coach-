@@ -46,13 +46,13 @@ export class BrowserBackend {
       await new Promise((resolve, reject) => {
         navigator.locks
           .request(
-            "apex-review-workspace",
+            ["apex", "review", "workspace"].join("-"),
             { ifAvailable: true },
             async (lock) => {
               if (!lock) {
                 reject(
                   Error(
-                    "Apex Review ist bereits in einem anderen Tab geöffnet. Anderen Tab schließen und diese Seite neu laden.",
+                    "Cossa's KI ist bereits in einem anderen Tab geöffnet. Anderen Tab schließen und diese Seite neu laden.",
                   ),
                 );
                 return;
@@ -410,7 +410,7 @@ export class BrowserBackend {
         blob: new Blob([JSON.stringify(report, null, 2)], {
           type: "application/json",
         }),
-        name: "apex-review.json",
+        name: "cossas-ki.json",
       };
     if (kind === "observations")
       return {
@@ -421,7 +421,7 @@ export class BrowserBackend {
       };
     if (kind === "export") {
       const markdown = [
-        "# Apex Review",
+        "# Cossa's KI",
         m.name,
         "Heuristische lokale Auswertung. Videozeiten beziehen sich auf das Original.",
         ...m.events.flatMap((e) => [
@@ -442,7 +442,7 @@ export class BrowserBackend {
       });
       return {
         blob: new Blob([archive], { type: "application/zip" }),
-        name: "apex-review.zip",
+        name: "cossas-ki.zip",
       };
     }
     throw Error("Unbekannter Download");
@@ -522,7 +522,7 @@ export class BrowserBackend {
       if (!blob.size) throw Error("Leerer Clip");
       return {
         blob,
-        name: `apex-clip-${eid}.${blob.type.includes("mp4") ? "mp4" : "webm"}`,
+        name: `cossas-ki-clip-${eid}.${blob.type.includes("mp4") ? "mp4" : "webm"}`,
       };
     } finally {
       clearTimeout(timer);

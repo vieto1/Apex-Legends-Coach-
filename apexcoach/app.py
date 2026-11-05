@@ -81,7 +81,7 @@ def create_app(root=None):
         yield
         pool.shutdown(wait=True)
 
-    app = FastAPI(title='Apex Review', lifespan=lifespan)
+    app = FastAPI(title='Cossa\'s KI', lifespan=lifespan)
     app.state.store = store
     app.state.pool = pool
     app.add_middleware(UploadLimit)
@@ -410,7 +410,7 @@ def create_app(root=None):
                 if path.exists():
                     archive.write(path,'observations.json')
             return Response(output.getvalue(),media_type='application/zip',
-                            headers={'Content-Disposition':'attachment; filename="apex-review.zip"'})
+                            headers={'Content-Disposition':'attachment; filename="cossas-ki.zip"'})
 
     @app.get('/api/matches/{mid}/clips/{eid}')
     @locked
@@ -432,7 +432,7 @@ def create_app(root=None):
             except (subprocess.SubprocessError, OSError) as exc:
                 temp.unlink(missing_ok=True)
                 raise HTTPException(500,'Clip konnte nicht erstellt werden') from exc
-        return FileResponse(target, media_type='video/mp4', filename=f'apex-{eid}.mp4')
+        return FileResponse(target, media_type='video/mp4', filename=f'cossas-ki-clip-{eid}.mp4')
 
     return app
 

@@ -1,4 +1,4 @@
-# Apex Review
+# Cossa's KI
 
 Lokale, private Review-Anwendung für Apex-Legends-Aufnahmen: Bildschirm aufnehmen oder Video hochladen, HUD auswerten, Momente im Video prüfen und mit dem Squad besprechen. Eigenständiger Funktionsentwurf ohne Omnic-Inhalte oder proprietäre Modelle.
 
@@ -24,13 +24,13 @@ Veröffentlichung und vollständige Hinweise: [GitHub-Pages-Anleitung](docs/gith
 
 ## Alternative: lokale Python-/Docker-Version
 
-Das vollständige Startpaket enthält `Start-Apex-Review.cmd` für Windows und `start-local.sh` für macOS/Linux. Mit laufendem Docker Desktop bzw. Docker mit Compose übernimmt es Installation und Start der benötigten Programme. [Kurzanleitung](SO-STARTEN.md).
+Das vollständige Startpaket enthält `Start-Cossas-KI.cmd` für Windows und `start-local.sh` für macOS/Linux. Mit laufendem Docker Desktop bzw. Docker mit Compose übernimmt es Installation und Start der benötigten Programme. [Kurzanleitung](SO-STARTEN.md).
 
 ```bash
 docker compose up -d --build --wait
 ```
 
-Python, FFmpeg, OCR und Laufzeitabhängigkeiten sind im Image enthalten. Das persistente Volume `apex-review_reviews` speichert die Daten. Die Anwendung läuft im Container ohne Root-Rechte und ist nur über die lokale Loopback-Portfreigabe erreichbar. Keine privaten Entwicklungsdaten werden ins Image kopiert. Nach dem Start kann **Beispiel ausprobieren** ein vollständig kalibriertes synthetisches Beispiel anlegen.
+Python, FFmpeg, OCR und Laufzeitabhängigkeiten sind im Image enthalten. Das persistente Volume `cossas-ki_reviews` speichert die Daten. Die Anwendung läuft im Container ohne Root-Rechte und ist nur über die lokale Loopback-Portfreigabe erreichbar. Keine privaten Entwicklungsdaten werden ins Image kopiert. Nach dem Start kann **Beispiel ausprobieren** ein vollständig kalibriertes synthetisches Beispiel anlegen.
 
 ## Start ohne Docker
 
@@ -147,12 +147,18 @@ REA 6.8.0 analysierte die eigene JavaScript-Oberfläche, zuletzt mit 10 Graphkno
 
 ## Auslieferung und Offline-Prüfung
 
-`scripts/package.py` erstellt `artifacts/Apex-Review.zip` mit Startdateien, Quellcode, Tests und Anleitung sowie einem SHA-256-Manifest. Private Daten, `.venv`, `.git`, Caches und Zugangsdaten werden nicht aufgenommen.
+`scripts/package.py` erstellt `artifacts/Cossas-KI.zip` mit Startdateien, Quellcode, Tests und Anleitung sowie einem SHA-256-Manifest. Private Daten, `.venv`, `.git`, Caches und Zugangsdaten werden nicht aufgenommen.
 
 ```bash
 .venv/bin/python scripts/package.py
 # Mit gebautem Docker-Image vollständige Analyse ohne Netzwerk prüfen:
-docker run --rm -i --network none apex-review:local python - < scripts/offline-smoke.py
+docker run --rm -i --network none cossas-ki:local python - < scripts/offline-smoke.py
 ```
 
 Die Windows-Batchdatei öffnet die Website nach erfolgreichem Docker-Healthcheck. Docker muss auf dem jeweiligen Rechner installiert und gestartet sein; diese Cloud-Sitzung kann keine Programme auf deinem privaten PC installieren. Die Batchdatei wurde hier unter Linux nicht nativ ausgeführt; dieselben Compose-Befehle und der Container wurden praktisch geprüft.
+
+## Gestaltung von Cossa's KI
+
+Die Website bietet eine eigenständige, anime-inspirierte Bildwelt mit rotem Mond, leuchtendem Observatorium, großem überlagertem Schriftzug, Gras und roten Blättern. Vier Kapitel führen von der Szene in Analyse, Archiv und Squad-Review. Scroll-Parallax, dezente Partikel und weiche Interaktionen respektieren reduzierte Bewegung; die Schriften liegen lokal. [Dateistruktur, Bewegung und Barrierefreiheit](docs/design.md).
+
+Bereits gespeicherte Browserdaten bleiben durch kompatible interne Speicherkennungen erhalten. Auch die bestehende GitHub-Adresse bleibt unverändert.

@@ -3,282 +3,543 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0b0e15" />
+    <meta
+      name="description"
+      content="Cossa's KI macht die entscheidenden Momente deines Apex-Gameplays sichtbar. Private Analyse, belegte Erkenntnisse und gemeinsames Squad-Review – direkt in deinem Browser."
+    />
+    <meta
+      property="og:title"
+      content="Cossa's KI · Hinter jedem Moment liegt ein Signal."
+    />
+    <meta
+      property="og:description"
+      content="Entdecke die Spuren in deinem Gameplay. Analysiere lokal. Verstehe gemeinsam."
+    />
+    <meta
+      property="og:image"
+      content="https://vieto1.github.io/Apex-Legends-Coach-/assets/cossas-ki-social.png"
+    />
+    <meta
+      property="og:image:alt"
+      content="Cossa's KI – ein leuchtendes Signal-Observatorium unter einem roten Mond"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://vieto1.github.io/Apex-Legends-Coach-/"
+    />
+    <title>Cossa's KI · Hinter jedem Moment liegt ein Signal.</title>
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23101517'/%3E%3Cpath d='M32 8L54 32 32 56 10 32Z' fill='%23c5f078'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0e15'/%3E%3Cpath d='M32 8L52 32 32 56 12 32Z' fill='none' stroke='%23e7bd6d' stroke-width='3'/%3E%3Cpath d='M32 19L43 32 32 45 21 32Z' fill='%23de625b'/%3E%3C/svg%3E"
     />
-    <title>Apex Review · Private Gameplay-Analyse</title>
+    <link
+      rel="preload"
+      href="/static/fonts/bebas-neue-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="stylesheet" href="/static/style.css" />
+    <script type="module" src="/static/cossa-motion.js"></script>
     <script type="module" src="/static/app.js"></script>
   </head>
   <body>
-    <header>
-      <a class="brand" href="/">◈ APEX <b>REVIEW</b></a
-      ><span id="systemStatus" role="status"
-        >LOKAL · PRIVAT · GEMEINSAM BESSER</span
+    <a class="skip-link" href="#analyse">Direkt zur Analyse</a>
+    <header class="site-header" id="siteHeader">
+      <a class="brand" href="#start" aria-label="Cossa's KI – zum Anfang"
+        ><span class="brand-mark" aria-hidden="true">◇</span
+        ><span
+          >Cossa's <b>KI</b><small>DEIN SPIEL. DEIN SIGNAL.</small></span
+        ></a
       >
+      <nav aria-label="Hauptnavigation">
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          <span>Menü</span><span class="menu-lines" aria-hidden="true"></span>
+        </button>
+        <div id="navLinks" class="nav-links">
+          <a href="#start" data-chapter="01">Entdecken</a
+          ><a href="#analyse" data-chapter="02">Analysieren</a
+          ><a href="#archiv" data-chapter="03">Archiv</a
+          ><a href="#squad" data-chapter="04">Squad</a
+          ><span class="nav-divider" aria-hidden="true"></span
+          ><button
+            id="motionToggle"
+            class="motion-toggle"
+            type="button"
+            aria-pressed="false"
+            aria-label="Animationen pausieren"
+          >
+            <span aria-hidden="true">◌</span>
+          </button>
+        </div>
+      </nav>
     </header>
-    <main>
-      <section class="intro">
-        <p class="eyebrow">DEIN NÄCHSTER FIGHT BEGINNT IM REVIEW</p>
-        <h1>Aus Gameplay wird<br /><em>ein besserer Plan.</em></h1>
-        <p>
-          Analysiere deine Apex-Aufnahmen. Prüfe die Belege.<br />Besprich die
-          entscheidenden Momente mit deinem Squad.
-        </p>
-      </section>
-      <section class="panel">
-        <div class="actions">
-          <button id="tryDemo" type="button">Beispiel ausprobieren</button
-          ><span class="muted"
-            >Synthetische HUD-Demo mit fertiger Kalibrierung – kein echtes
-            Gameplay.</span
-          >
+    <main id="main">
+      <section
+        id="start"
+        class="hero"
+        aria-labelledby="heroTitle"
+        data-chapter-section="01"
+      >
+        <div class="hero-art" aria-hidden="true">
+          <img
+            class="sky-layer parallax-layer"
+            data-depth="0.055"
+            src="/static/cossa-sky.svg"
+            alt=""
+            fetchpriority="high"
+          />
+          <div class="moon-layer parallax-layer" data-depth="0.095">
+            <div class="moon"></div>
+          </div>
+          <div class="mist-layer parallax-layer" data-depth="0.10"></div>
+          <img
+            class="sanctum-layer parallax-layer"
+            data-depth="0.14"
+            src="/static/cossa-sanctum.svg"
+            alt=""
+            fetchpriority="high"
+          />
         </div>
-        <div class="section-head">
-          <h2>01 / Aufnahme hinzufügen</h2>
-          <span>MP4, MOV, MKV, WebM · bis 2 GiB / 2 h</span>
-        </div>
-        <div class="actions">
-          <button id="recordStart" type="button">
-            ● Bildschirm / Spielfenster aufnehmen</button
-          ><button id="recordStop" type="button" disabled>
-            Aufnahme beenden</button
-          ><span id="recordStatus" role="status"
-            >Lokal im Browser · Audio nur bei Freigabe der Quelle</span
-          >
-        </div>
-        <form id="upload">
-          <label class="drop"
-            >Gameplay auswählen<input
-              type="file"
-              id="file"
-              accept="video/*"
-              required /></label
-          ><a id="downloadRecording" hidden
-            >Ausgewählte Aufnahme lokal speichern ↗</a
-          >
-          <details id="calibrationDetails">
-            <summary>HUD kalibrieren — vor der Analyse empfohlen</summary>
-            <p>
-              Wähle das Video aus. Markiere zuerst nur die Ziffern des
-              kumulierten Schadenszählers oben rechts, dann den Karteninhalt der
-              Minimap. Bei Gesundheit/Schild nur den inneren horizontalen Balken
-              markieren, bei Munition nur die Magazinzahl. Die Werte gelten für
-              dieses Video. Unmarkierte Bereiche bleiben unbekannt.
-            </p>
-            <div class="calibration">
-              <video id="calibrationVideo" controls muted></video
-              ><canvas id="calibrationCanvas"></canvas>
-            </div>
-            <div class="actions">
-              <button type="button" id="capture">
-                Aktuelles Bild kalibrieren</button
-              ><button type="button" id="damageMode">
-                Schadenszähler markieren</button
-              ><button type="button" id="mapMode">Minimap markieren</button
-              ><button type="button" id="healthMode">
-                Gesundheit markieren</button
-              ><button type="button" id="shieldMode">Schild markieren</button
-              ><button type="button" id="ammoMode">Munition markieren</button
-              ><button type="button" id="clearRoi">Markierungen löschen</button>
-            </div>
-            <p id="roiStatus">Keine HUD-Bereiche ausgewählt.</p>
-            <label
-              >HUD-Koordinaten (JSON, relativ zum Bild)<textarea
-                id="roiJson"
-                spellcheck="false"
-              ></textarea></label
-            ><button type="button" id="applyRoi">Koordinaten übernehmen</button>
-            <div class="actions">
-              <label
-                >Gespeichertes Profil<select id="profileSelect">
-                  <option value="">Profil auswählen</option>
-                </select></label
-              ><button type="button" id="loadProfile">Profil laden</button
-              ><button type="button" id="deleteProfile">Profil löschen</button>
-            </div>
-            <div class="actions">
-              <label
-                >Profilname<input
-                  id="profileName"
-                  maxlength="80"
-                  placeholder="Apex 1080p HUD" /></label
-              ><button type="button" id="saveProfile">Profil speichern</button>
-            </div>
-          </details>
-          <p class="muted">
-            Lokale Heuristiken, keine verifizierte Spieltelemetrie. Ohne
-            HUD-Kalibrierung wird nur das Video vorbereitet. Keine automatischen
-            Aussagen zu Reaktionszeiten oder taktischer Qualität.
+        <div class="hero-copy">
+          <p class="chapter-label">
+            <span></span>KAPITEL 00 — DAS STILLE SIGNAL
           </p>
-          <button class="primary" id="submit">Aufnahme analysieren ↗</button>
-          <p id="uploadStatus" role="status"></p>
-        </form>
+          <p class="hero-manifesto">
+            Wo dein Spiel<br />seine Geheimnisse<br /><em>offenbart.</em>
+          </p>
+          <p class="hero-description">
+            Jeder Moment hinterlässt eine Spur.<br />Entdecke, was zwischen
+            deinen Entscheidungen liegt.
+          </p>
+          <a class="text-link" href="#analyse"
+            >Dein Gameplay entschlüsseln
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.3"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M5 19 19 5M5 5h14v14" /></svg
+          ></a>
+        </div>
+        <p class="hero-coordinate" aria-hidden="true">
+          FOKUS / INTUITION / KLARHEIT
+        </p>
+        <h1 class="hero-word parallax-layer" data-depth="0.18" id="heroTitle">
+          Cossa's <span>KI</span>
+        </h1>
+        <img
+          class="foreground-layer parallax-layer"
+          data-depth="0.25"
+          src="/static/cossa-foreground.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="leaves" id="leaves" aria-hidden="true"></div>
+        <a class="signal-card" href="#analyse"
+          ><span class="signal-art" aria-hidden="true"><i></i><b>◇</b></span
+          ><span
+            ><small>DEIN NÄCHSTES KAPITEL</small
+            ><strong>Das Unsichtbare<br />sichtbar machen.</strong
+            ><span class="signal-card-link">Analyse betreten ↗</span></span
+          ></a
+        >
+        <div class="hero-bottom">
+          <a class="scroll-cue" href="#analyse"
+            ><span class="scroll-line" aria-hidden="true"></span>SCROLL TO ENTER
+            <span aria-hidden="true">↓</span></a
+          >
+          <nav class="chapter-nav" aria-label="Kapitel">
+            <a
+              href="#start"
+              data-chapter="01"
+              aria-label="01 – Entdecken"
+              aria-current="location"
+              >01</a
+            ><a href="#analyse" data-chapter="02" aria-label="02 – Analysieren"
+              >02</a
+            ><a href="#archiv" data-chapter="03" aria-label="03 – Archiv">03</a
+            ><a href="#squad" data-chapter="04" aria-label="04 – Squad">04</a>
+          </nav>
+          <p class="hero-footnote">
+            FÜR DEINEN FOKUS.<br /><span>NICHT FÜR DIE CLOUD.</span>
+          </p>
+        </div>
       </section>
-      <div class="workspace">
-        <aside class="panel">
-          <label
-            >Aufnahmen suchen<input
-              id="matchSearch"
-              type="search"
-              placeholder="Dateiname …"
-          /></label>
-          <h2>02 / Deine Aufnahmen</h2>
-          <div id="matches"></div>
-        </aside>
-        <section class="panel review">
-          <div class="section-head">
-            <h2>03 / Squad-Review</h2>
-            <a id="export" hidden>JSON exportieren ↗</a>
-          </div>
-          <div id="empty">
-            <h3>Jeder Moment hat Kontext.</h3>
-            <p>
-              Wähle eine Aufnahme. Hier erscheinen Video, Timeline, Belege und
-              eure Notizen.
-            </p>
-          </div>
-          <div id="review" hidden>
-            <h3 id="matchName"></h3>
-            <div class="actions">
-              <button type="button" id="calibrateExisting">
-                Diese Aufnahme kalibrieren</button
-              ><button type="button" id="reanalyze">
-                Mit aktuellem HUD-Profil neu analysieren</button
-              ><a id="archive">Berichtarchiv herunterladen</a
-              ><a id="originalVideo">Original herunterladen</a
-              ><button type="button" id="deleteMatch" class="danger">
-                Aufnahme löschen
-              </button>
+      <div class="studio-shell">
+        <section
+          class="chapter-section"
+          id="analyse"
+          data-chapter-section="02"
+          aria-labelledby="analyseTitle"
+        >
+          <div class="chapter-intro reveal">
+            <div>
+              <p class="chapter-label">
+                <span></span>KAPITEL 01 — DIE SPUR LESEN
+              </p>
+              <h2 id="analyseTitle">
+                Hinter jedem Moment<br />liegt ein <em>Signal.</em>
+              </h2>
             </div>
-            <p id="actionStatus" role="status"></p>
-            <p id="analysisStatus" role="status"></p>
-            <video id="player" controls preload="metadata"></video>
-            <div class="stats" id="stats"></div>
-            <p id="qualityStatus" class="muted"></p>
-            <h3>Timeline &amp; Diskussionspunkte</h3>
-            <div class="actions">
-              <label
-                >Ereignistyp<select id="eventFilter">
-                  <option value="">Alle Typen</option>
-                  <option value="fight">Kampfphasen</option>
-                  <option value="combat_start">Kampfbeginn</option>
-                  <option value="damage_delta">Schadenszuwachs</option>
-                  <option value="position_change">Positionswechsel</option>
-                  <option value="resource_loss">Ressourcenverlust</option>
-                  <option value="resource_recovery">Wiederherstellung</option>
-                  <option value="ammo_refill">Nachladen / Waffenwechsel</option>
-                  <option value="exposure_review">Bewegung unter Druck</option>
-                  <option value="reload_pressure">Nachladen unter Druck</option>
-                  <option value="low_health_fight">
-                    Niedrige Gesundheit im Kampf
-                  </option>
-                  <option value="manual">Eigene Markierungen</option>
-                </select></label
-              ><label
-                >Review-Status<select id="reviewFilter">
-                  <option value="">Alle Befunde</option>
-                  <option value="unreviewed">Ungeprüft</option>
-                  <option value="confirmed">Bestätigt</option>
-                  <option value="dismissed">Verworfen</option>
-                </select></label
+            <div class="chapter-intro-copy">
+              <p>
+                Bring dein Gameplay mit. Cossa's KI hilft dir, die
+                entscheidenden Momente zu finden — mit Zeitstempeln, Belegen und
+                Raum für deinen eigenen Blick.
+              </p>
+              <span class="runtime-status" id="systemStatus" role="status"
+                >LOKAL · PRIVAT · GEMEINSAM BESSER</span
               >
             </div>
-            <div id="events"></div>
-            <details>
-              <summary>Eigenen Moment markieren</summary>
-              <form id="eventForm">
+          </div>
+          <section class="panel upload-panel" aria-labelledby="uploadHeading">
+            <div class="actions">
+              <button id="tryDemo" type="button">Beispiel ausprobieren</button
+              ><span class="muted"
+                >Synthetische HUD-Demo mit fertiger Kalibrierung – kein echtes
+                Gameplay.</span
+              >
+            </div>
+            <div class="section-head">
+              <h3 id="uploadHeading">Dein nächstes Kapitel</h3>
+              <span>MP4, MOV, MKV, WebM · bis 2 GiB / 2 h</span>
+            </div>
+            <div class="actions">
+              <button id="recordStart" type="button">
+                ● Bildschirm / Spielfenster aufnehmen</button
+              ><button id="recordStop" type="button" disabled>
+                Aufnahme beenden</button
+              ><span id="recordStatus" role="status"
+                >Lokal im Browser · Audio nur bei Freigabe der Quelle</span
+              >
+            </div>
+            <form id="upload">
+              <label class="drop"
+                >Gameplay auswählen<input
+                  type="file"
+                  id="file"
+                  accept="video/*"
+                  required /></label
+              ><a id="downloadRecording" hidden
+                >Ausgewählte Aufnahme lokal speichern ↗</a
+              >
+              <details id="calibrationDetails">
+                <summary>HUD kalibrieren — vor der Analyse empfohlen</summary>
+                <p>
+                  Wähle das Video aus. Markiere zuerst nur die Ziffern des
+                  kumulierten Schadenszählers oben rechts, dann den Karteninhalt
+                  der Minimap. Bei Gesundheit/Schild nur den inneren
+                  horizontalen Balken markieren, bei Munition nur die
+                  Magazinzahl. Die Werte gelten für dieses Video. Unmarkierte
+                  Bereiche bleiben unbekannt.
+                </p>
+                <div class="calibration">
+                  <video id="calibrationVideo" controls muted></video
+                  ><canvas id="calibrationCanvas"></canvas>
+                </div>
+                <div class="actions">
+                  <button type="button" id="capture">
+                    Aktuelles Bild kalibrieren</button
+                  ><button type="button" id="damageMode">
+                    Schadenszähler markieren</button
+                  ><button type="button" id="mapMode">Minimap markieren</button
+                  ><button type="button" id="healthMode">
+                    Gesundheit markieren</button
+                  ><button type="button" id="shieldMode">
+                    Schild markieren</button
+                  ><button type="button" id="ammoMode">
+                    Munition markieren</button
+                  ><button type="button" id="clearRoi">
+                    Markierungen löschen
+                  </button>
+                </div>
+                <p id="roiStatus">Keine HUD-Bereiche ausgewählt.</p>
                 <label
-                  >Kategorie<select id="manualKind">
-                    <option value="manual">Beobachtung</option>
-                    <option value="enemy_visible">
-                      Gegner erstmals sichtbar
-                    </option>
-                    <option value="first_shot">Erster eigener Schuss</option>
-                    <option value="positioning">Positionierung</option>
-                    <option value="rotation">Rotation</option>
-                    <option value="resources">Ressourcen</option>
-                    <option value="decision">
-                      Entscheidung / Fehlerquelle
-                    </option>
-                  </select></label
-                >
+                  >HUD-Koordinaten (JSON, relativ zum Bild)<textarea
+                    id="roiJson"
+                    spellcheck="false"
+                  ></textarea></label
+                ><button type="button" id="applyRoi">
+                  Koordinaten übernehmen
+                </button>
                 <div class="actions">
                   <label
-                    >Start (Sekunden)<input
-                      id="eventStart"
-                      type="number"
-                      min="0"
-                      step="0.01"
+                    >Gespeichertes Profil<select id="profileSelect">
+                      <option value="">Profil auswählen</option>
+                    </select></label
+                  ><button type="button" id="loadProfile">Profil laden</button
+                  ><button type="button" id="deleteProfile">
+                    Profil löschen
+                  </button>
+                </div>
+                <div class="actions">
+                  <label
+                    >Profilname<input
+                      id="profileName"
+                      maxlength="80"
+                      placeholder="Apex 1080p HUD" /></label
+                  ><button type="button" id="saveProfile">
+                    Profil speichern
+                  </button>
+                </div>
+              </details>
+              <p class="muted">
+                Lokale Heuristiken, keine verifizierte Spieltelemetrie. Ohne
+                HUD-Kalibrierung wird nur das Video vorbereitet. Keine
+                automatischen Aussagen zu Reaktionszeiten oder taktischer
+                Qualität.
+              </p>
+              <button class="primary" id="submit">
+                Aufnahme analysieren ↗
+              </button>
+              <p id="uploadStatus" role="status"></p>
+            </form>
+          </section>
+        </section>
+        <section
+          class="chapter-section"
+          id="archiv"
+          data-chapter-section="03"
+          aria-labelledby="archiveTitle"
+        >
+          <div class="chapter-intro reveal">
+            <div>
+              <p class="chapter-label">
+                <span></span>KAPITEL 02 — ERINNERUNGEN BEWAHREN
+              </p>
+              <h2 id="archiveTitle">
+                Deine Spuren.<br />Dein <em>Archiv.</em>
+              </h2>
+            </div>
+            <p class="chapter-intro-copy">
+              Jede Aufnahme ist ein Ausgangspunkt. Kehre zurück, vergleiche
+              Momente und entdecke Muster, die dir im Spiel entgangen sind.
+            </p>
+          </div>
+          <aside
+            class="panel archive-panel"
+            aria-label="Deine gespeicherten Aufnahmen"
+          >
+            <label
+              >Aufnahmen suchen<input
+                id="matchSearch"
+                type="search"
+                placeholder="Dateiname …"
+            /></label>
+            <h3>Deine Aufnahmen</h3>
+            <div id="matches"></div>
+          </aside>
+        </section>
+        <section
+          class="chapter-section"
+          id="squad"
+          data-chapter-section="04"
+          aria-labelledby="squadTitle"
+        >
+          <div class="chapter-intro reveal">
+            <div>
+              <p class="chapter-label">
+                <span></span>KAPITEL 03 — GEMEINSAM VERSTEHEN
+              </p>
+              <h2 id="squadTitle">
+                Ein anderer Blick.<br />Ein stärkeres <em>Team.</em>
+              </h2>
+            </div>
+            <p class="chapter-intro-copy">
+              Halte an. Schau genauer hin. Besprecht die Schlüsselmomente mit
+              eurem Squad — ohne vorschnelle Urteile, mit dem Clip als
+              gemeinsamem Ausgangspunkt.
+            </p>
+          </div>
+          <section class="panel review">
+            <div class="section-head">
+              <h3>Gemeinsam genauer hinsehen</h3>
+              <a id="export" hidden>JSON exportieren ↗</a>
+            </div>
+            <div id="empty">
+              <h3>Jeder Moment hat Kontext.</h3>
+              <p>
+                Wähle eine Aufnahme. Hier erscheinen Video, Timeline, Belege und
+                eure Notizen.
+              </p>
+            </div>
+            <div id="review" hidden>
+              <h3 id="matchName"></h3>
+              <div class="actions">
+                <button type="button" id="calibrateExisting">
+                  Diese Aufnahme kalibrieren</button
+                ><button type="button" id="reanalyze">
+                  Mit aktuellem HUD-Profil neu analysieren</button
+                ><a id="archive">Berichtarchiv herunterladen</a
+                ><a id="originalVideo">Original herunterladen</a
+                ><button type="button" id="deleteMatch" class="danger">
+                  Aufnahme löschen
+                </button>
+              </div>
+              <p id="actionStatus" role="status"></p>
+              <p id="analysisStatus" role="status"></p>
+              <video id="player" controls preload="metadata"></video>
+              <div class="stats" id="stats"></div>
+              <p id="qualityStatus" class="muted"></p>
+              <h3>Timeline &amp; Diskussionspunkte</h3>
+              <div class="actions">
+                <label
+                  >Ereignistyp<select id="eventFilter">
+                    <option value="">Alle Typen</option>
+                    <option value="fight">Kampfphasen</option>
+                    <option value="combat_start">Kampfbeginn</option>
+                    <option value="damage_delta">Schadenszuwachs</option>
+                    <option value="position_change">Positionswechsel</option>
+                    <option value="resource_loss">Ressourcenverlust</option>
+                    <option value="resource_recovery">Wiederherstellung</option>
+                    <option value="ammo_refill">
+                      Nachladen / Waffenwechsel
+                    </option>
+                    <option value="exposure_review">
+                      Bewegung unter Druck
+                    </option>
+                    <option value="reload_pressure">
+                      Nachladen unter Druck
+                    </option>
+                    <option value="low_health_fight">
+                      Niedrige Gesundheit im Kampf
+                    </option>
+                    <option value="manual">Eigene Markierungen</option>
+                  </select></label
+                ><label
+                  >Review-Status<select id="reviewFilter">
+                    <option value="">Alle Befunde</option>
+                    <option value="unreviewed">Ungeprüft</option>
+                    <option value="confirmed">Bestätigt</option>
+                    <option value="dismissed">Verworfen</option>
+                  </select></label
+                >
+              </div>
+              <div id="events"></div>
+              <details>
+                <summary>Eigenen Moment markieren</summary>
+                <form id="eventForm">
+                  <label
+                    >Kategorie<select id="manualKind">
+                      <option value="manual">Beobachtung</option>
+                      <option value="enemy_visible">
+                        Gegner erstmals sichtbar
+                      </option>
+                      <option value="first_shot">Erster eigener Schuss</option>
+                      <option value="positioning">Positionierung</option>
+                      <option value="rotation">Rotation</option>
+                      <option value="resources">Ressourcen</option>
+                      <option value="decision">
+                        Entscheidung / Fehlerquelle
+                      </option>
+                    </select></label
+                  >
+                  <div class="actions">
+                    <label
+                      >Start (Sekunden)<input
+                        id="eventStart"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        required /></label
+                    ><label
+                      >Ende (Sekunden)<input
+                        id="eventEnd"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        required /></label
+                    ><button type="button" id="markTime">
+                      Aktuelle Zeit übernehmen
+                    </button>
+                  </div>
+                  <label
+                    >Titel<input
+                      id="eventTitle"
+                      maxlength="150"
                       required /></label
                   ><label
-                    >Ende (Sekunden)<input
-                      id="eventEnd"
-                      type="number"
-                      min="0"
-                      step="0.01"
-                      required /></label
-                  ><button type="button" id="markTime">
-                    Aktuelle Zeit übernehmen
-                  </button>
-                </div>
+                    >Erkenntnis / Verbesserungsvorschlag<textarea
+                      id="eventAdvice"
+                      maxlength="2000"
+                    ></textarea>
+                  </label>
+                  <div class="actions">
+                    <button class="primary" id="saveMoment">
+                      Moment speichern</button
+                    ><button type="button" id="cancelMoment" hidden>
+                      Bearbeiten abbrechen
+                    </button>
+                  </div>
+                  <p id="eventStatus" role="status"></p>
+                </form>
+                <p class="muted">
+                  „Gegner sichtbar“ gefolgt von „Erster Schuss“ ergibt ein
+                  manuell markiertes Antwortintervall. Es ist keine gemessene
+                  kognitive Reaktionszeit.
+                </p>
+              </details>
+              <div id="responseIntervals"></div>
+              <h3>Squad-Notizen</h3>
+              <form id="noteForm">
                 <label
-                  >Titel<input
-                    id="eventTitle"
-                    maxlength="150"
+                  >Zeit im Video (Sekunden)<input
+                    id="noteTime"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="0"
                     required /></label
+                ><button type="button" id="useTime">Aktuelle Videozeit</button
                 ><label
-                  >Erkenntnis / Verbesserungsvorschlag<textarea
-                    id="eventAdvice"
+                  >Beobachtung<textarea
+                    id="noteBody"
                     maxlength="2000"
-                  ></textarea>
-                </label>
-                <div class="actions">
-                  <button class="primary" id="saveMoment">
-                    Moment speichern</button
-                  ><button type="button" id="cancelMoment" hidden>
-                    Bearbeiten abbrechen
-                  </button>
-                </div>
-                <p id="eventStatus" role="status"></p>
+                    required
+                    placeholder="Was hätten wir in diesem Moment anders machen können?"
+                  ></textarea></label
+                ><button class="primary">Notiz speichern</button>
+                <p id="noteStatus" role="status"></p>
               </form>
-              <p class="muted">
-                „Gegner sichtbar“ gefolgt von „Erster Schuss“ ergibt ein manuell
-                markiertes Antwortintervall. Es ist keine gemessene kognitive
-                Reaktionszeit.
-              </p>
-            </details>
-            <div id="responseIntervals"></div>
-            <h3>Squad-Notizen</h3>
-            <form id="noteForm">
-              <label
-                >Zeit im Video (Sekunden)<input
-                  id="noteTime"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value="0"
-                  required /></label
-              ><button type="button" id="useTime">Aktuelle Videozeit</button
-              ><label
-                >Beobachtung<textarea
-                  id="noteBody"
-                  maxlength="2000"
-                  required
-                  placeholder="Was hätten wir in diesem Moment anders machen können?"
-                ></textarea></label
-              ><button class="primary">Notiz speichern</button>
-              <p id="noteStatus" role="status"></p>
-            </form>
-            <div id="notes"></div>
-          </div>
+              <div id="notes"></div>
+            </div>
+          </section>
         </section>
+        <footer class="site-footer">
+          <a class="brand" href="#start"
+            ><span class="brand-mark" aria-hidden="true">◇</span
+            ><span
+              >Cossa's <b>KI</b><small>DEIN SPIEL. DEIN SIGNAL.</small></span
+            ></a
+          >
+          <p>
+            Eine unabhängige, private Analyse für Apex Legends.<br />Erkenntnisse
+            sind Diskussionshilfen. Prüfe sie im Originalvideo.
+          </p>
+          <a class="back-top" href="#start"
+            >Zurück zum Anfang <span aria-hidden="true">↑</span></a
+          >
+          <p class="privacy-note">
+            Deine Videos bleiben lokal. Exportiere wichtige Aufnahmen und
+            Berichte, bevor du Browserdaten löschst.
+          </p>
+        </footer>
       </div>
-      <footer>
-        Apex Review ist ein unabhängiges privates Projekt. Ergebnisse sind
-        Diskussionshilfen. Prüfe jeden vorgeschlagenen Moment im Originalvideo.
-      </footer>
     </main>
   </body>
 </html>

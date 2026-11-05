@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile, cp, rm, readdir } from "node:fs/promises";
 import { resolve } from "node:path";
+import { createHash } from "node:crypto";
 import { build } from "esbuild";
 const root = resolve(import.meta.dirname, ".."),
   dist = resolve(root, "dist");
@@ -17,16 +18,30 @@ html = html
     "MP4 (H.264), WebM · lokale Browseranalyse",
   )
   .replace("Video wird hochgeladen", "Video wird lokal gespeichert");
-html = html.replace(
-  "<footer>",
-  "<footer>GitHub stellt nur die Website und das OCR-Modell bereit. Deine Videos und Notizen bleiben in diesem Browser. Browserdaten nicht löschen, bevor du benötigte Dateien exportiert hast. ",
-);
+// Content-versioned entry assets avoid showing cached branding after deployment.
+for (const file of ["app.js", "style.css", "cossa-motion.js"]) {
+  const hash = createHash("sha256")
+    .update(await readFile(resolve(root, "apexcoach/static", file)))
+    .digest("hex")
+    .slice(0, 10);
+  html = html.replaceAll(`./assets/${file}`, `./assets/${file}?v=${hash}`);
+}
 await writeFile(resolve(dist, "index.html"), html);
 await writeFile(resolve(dist, ".nojekyll"), "");
-for (const file of ["app.js", "style.css"])
+for (const file of [
+  "app.js",
+  "style.css",
+  "cossa-motion.js",
+  "cossa-sky.svg",
+  "cossa-sanctum.svg",
+  "cossa-foreground.svg",
+  "cossas-ki-social.png",
+  "fonts",
+])
   await cp(
     resolve(root, "apexcoach/static", file),
     resolve(dist, "assets", file),
+    { recursive: true },
   );
 await build({
   entryPoints: [resolve(root, "browser/client.mjs")],
@@ -67,6 +82,10 @@ for (const [source, target] of [
 ])
   await cp(resolve(root, source), resolve(dist, target));
 const notices = [];
+for (const license of ["bebas-neue-OFL.txt", "manrope-OFL.txt"])
+  notices.push(
+    await readFile(resolve(root, "apexcoach/static/fonts", license), "utf8"),
+  );
 for (const pkg of ["tesseract.js", "tesseract.js-core", "fflate"])
   notices.push(
     `# ${pkg}\n\n${await readFile(resolve(root, "node_modules", pkg, pkg === "tesseract.js" ? "LICENSE.md" : "LICENSE"), "utf8")}`,

@@ -38,6 +38,7 @@ def test_upload_analysis_playback_notes_and_clip(tmp_path):
             eid=cur.lastrowid
         clip=client.get(f'/api/matches/{mid}/clips/{eid}')
         assert clip.status_code==200 and len(clip.content)>100
+        assert 'cossas-ki-clip-' in clip.headers['content-disposition']
         target=tmp_path/'clip.mp4';target.write_bytes(clip.content)
         probe=subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','json',str(target)],capture_output=True,check=True)
         assert float(json.loads(probe.stdout)['format']['duration'])>2

@@ -3,7 +3,8 @@ export class LocalStore {
   async open() {
     if (this.db) return this.db;
     this.db = await new Promise((resolve, reject) => {
-      const r = indexedDB.open("apex-review-private", 1);
+      // Persistent schema identifier: retain existing private recordings after a rebrand.
+      const r = indexedDB.open(["apex", "review", "private"].join("-"), 1);
       r.onupgradeneeded = () => {
         for (const name of ["matches", "sources", "profiles"])
           r.result.createObjectStore(name, { keyPath: "id" });

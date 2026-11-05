@@ -1,7 +1,7 @@
-name: apex-review
+name: cossas-ki
 services:
   app:
-    image: apex-review:local
+    image: cossas-ki:local
     build: .
     ports:
       - "127.0.0.1:${APEX_PORT:-8000}:8000"
@@ -12,3 +12,4 @@ services:
     stop_grace_period: 30s
 volumes:
   reviews:
+    name: ${COSSA_DATA_VOLUME:-cossas-ki_reviews}

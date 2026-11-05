@@ -24,7 +24,7 @@ def review_metrics(match):
 
 
 def markdown_report(match):
-    lines=['# Apex Review',f"Aufnahme: {match['name']}",f"Dauer: {match['duration']:.1f} s",'',
+    lines=['# Cossa\'s KI',f"Aufnahme: {match['name']}",f"Dauer: {match['duration']:.1f} s",'',
            'Heuristische Signale; keine verifizierte Spieltelemetrie. Zeitangaben beziehen sich auf das Originalvideo.',
            'Clips: API /api/matches/<id>/clips/<event-id>; im Downloadarchiv sind nur Bericht und Beobachtungen enthalten.','',
            '## Ereignisse']

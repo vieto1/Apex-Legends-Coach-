@@ -1,4 +1,4 @@
-name: Build and publish browser website
+name: "Publish Cossa's KI"
 on:
   push:
     branches: [main]
@@ -23,7 +23,7 @@ jobs:
       - run: npm run build
       - uses: actions/upload-artifact@v6
         with:
-          name: apex-review-website
+          name: cossas-ki-website
           path: dist
       - name: Publish static branch
         uses: peaceiris/actions-gh-pages@v4

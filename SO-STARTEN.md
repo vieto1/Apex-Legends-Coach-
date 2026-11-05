@@ -1,4 +1,4 @@
-# Apex Review direkt starten
+# Cossa's KI direkt starten
 
 ## MacBook: Website ohne Installation
 
@@ -10,7 +10,7 @@ Videos und Notizen bleiben in deinem Browserprofil. Kein Docker oder Python nöt
 
 1. **Docker Desktop muss installiert sein und laufen.** Linux-Container verwenden (Docker-Desktop-Standard).
 2. Dieses ZIP vollständig entpacken.
-3. Im Ordner **Start-Apex-Review.cmd** doppelklicken.
+3. Im Ordner **Start-Cossas-KI.cmd** doppelklicken.
 4. Der Browser öffnet die lokale Website automatisch, sobald sie bereit ist.
 5. Zum Kennenlernen **Beispiel ausprobieren** anklicken. Anschließend eigenes Video hochladen oder das Spielfenster aufnehmen.
 
@@ -30,11 +30,11 @@ Alternativ auf allen Plattformen:
 docker compose up -d --build --wait
 ```
 
-Die lokale Website läuft auf `http://localhost:8000`. Bei belegtem Port z. B. `APEX_PORT=8008` setzen (Windows cmd: `set APEX_PORT=8008`, PowerShell: `$env:APEX_PORT=8008`), dann erneut starten. Zum Stoppen `Stop-Apex-Review.cmd` oder `docker compose stop` verwenden.
+Die lokale Website läuft auf `http://localhost:8000`. Bei belegtem Port z. B. `APEX_PORT=8008` setzen (Windows cmd: `set APEX_PORT=8008`, PowerShell: `$env:APEX_PORT=8008`), dann erneut starten. Zum Stoppen `Stop-Cossas-KI.cmd` oder `docker compose stop` verwenden.
 
 ## Daten und Privatsphäre
 
-Aufnahmen, Notizen und Ergebnisse bleiben im Docker-Volume `apex-review_reviews` auf deinem Rechner. Ein Update oder normaler Neustart löscht sie nicht. **Kein `docker compose down -v` ausführen**, wenn die Daten erhalten bleiben sollen. Einzelne Aufnahmen lassen sich in der Website löschen. Das Startpaket enthält keine privaten Aufnahmen aus der Entwicklungsumgebung.
+Aufnahmen, Notizen und Ergebnisse bleiben im Docker-Volume `cossas-ki_reviews` auf deinem Rechner. Ein Update oder normaler Neustart löscht sie nicht. **Kein `docker compose down -v` ausführen**, wenn die Daten erhalten bleiben sollen. Einzelne Aufnahmen lassen sich in der Website löschen. Das Startpaket enthält keine privaten Aufnahmen aus der Entwicklungsumgebung.
 
 Die Website ist standardmäßig nur auf deinem Rechner erreichbar. Für gemeinsames Review Dateien/Clips exportieren oder zusammen am Rechner ansehen. Öffentliches Hosting und Nutzerverwaltung sind nicht eingerichtet.
 
